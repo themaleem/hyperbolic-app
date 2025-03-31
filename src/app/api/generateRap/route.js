@@ -7,7 +7,12 @@ export async function POST(req) {
     const apiKey = process.env.HYPERBOLIC_API_KEY;
     const url = "https://api.hyperbolic.xyz/v1/chat/completions";
 
-    const prompt = `You're in a free style rap battle competition and you've made to the finals where only the best 4 rappers remain, each finalist is given 2 words each to do a freestyle with, your words are "${word1}" are "${word2}" and "silver", what bars are you spitting?  
+    const prompt = `You're in a free style rap battle competition and you've made to the finals where only the best 4 rappers remain, each finalist is given 2 words each to do a freestyle with, your words are "${word1}" are "${word2}" and "silver", what witty bars are you spitting champ? 
+    
+    Rules:
+    - Return ONLY 4 punchlines of the rap, NOTHING MORE, NOTHING LESS. nothing else is needed.
+    - Ensure the punchline are quick and direct, at most 6-8 words per line.
+    - END EACH LINE WITH A "." (also known as a fullstop, period, dot, point). This is absolutely needed because i am feeding the response into a text-to-speech api,and it needs to be accurate!
     `;
 
     const response = await fetch(url, {
