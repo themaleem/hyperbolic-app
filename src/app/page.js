@@ -1,18 +1,33 @@
 "use client";
+
+import axios from "axios";
 import { useState } from "react";
 
 export default function Home() {
-  const [word1, setWord1] = useState("");
-  const [word2, setWord2] = useState("");
   const [rap, setRap] = useState("");
-  const [battleMode, setBattleMode] = useState(false);
+  const [word2, setWord2] = useState("");
+  const [word1, setWord1] = useState("");
   const [loading, setLoading] = useState(false);
+  const [battleMode, setBattleMode] = useState(false);
 
   const generateRap = async () => {
     if (!word1 || !word2) return;
 
     setLoading(true);
-    setRap("some random text");
+    setRap("");
+
+    try {
+      const response = await axios.post("/api/generateRap", {
+        word1,
+        word2,
+      });
+
+      setRap(response.data.rap);
+    } catch (error) {
+      alert("Error generating rap. Try again!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const playRap = () => {
